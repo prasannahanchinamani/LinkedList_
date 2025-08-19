@@ -13,6 +13,23 @@ class Node {
 class LinkedList {
     Node head;
 
+    // Floyd's cycle detection method
+    public boolean hasCycle() {
+        if (head == null) return false;
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;           //  by 1
+            fast = fast.next.next;      //  by 2
+
+            if (slow == fast) {
+                return true;            // cycle detected
+            }
+        }
+        return false;                   // no cycle
+    }
+
     public void addStarting(int data) {
         if (head == null) {
             head = new Node(data);
@@ -40,19 +57,6 @@ class LinkedList {
         }
         System.out.println();
     }
-
-    public Node reverse() {
-        Node curr=head;
-        Node prev=null;
-        Node next=null;
-        while(curr!=null){
-            next=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=next;
-        }
-        return prev;
-    }
 }
 
 public class SinglularLinkedList {
@@ -65,8 +69,14 @@ public class SinglularLinkedList {
         linkedList.convertArraytoLinkedlist(arr);
         // Display the constructed linked list
         linkedList.displaylist();  // Output: 1 2 3 4 5
-        linkedList.head=linkedList.reverse();
-        linkedList.displaylist();
+        System.out.println("cyclic: "+linkedList.hasCycle());
+        //adding last
+        Node temp = linkedList.head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = linkedList.head.next;//2
+        System.out.println("cyclic: "+linkedList.hasCycle());
 
 
     }
