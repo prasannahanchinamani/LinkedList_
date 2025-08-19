@@ -40,67 +40,31 @@ class LinkedList {
         System.out.println();
     }
 
-    public void deleteStarting() {
-        if (head != null) {
-            Node temp = head;
-            head = head.next;
-        }
-    }
-
-    public void deleteLast() {
-        if (head == null) {
-            System.out.println("List is empty, no nodes to delete.");
-            return;
-        }
-
-        if (head.next == null) {
-            // If only one node exists
-            head = null;
-            return;
-        }
-        Node temp = head;
-        while (temp.next.next != null) {
-            temp = temp.next;
-        }
-        temp.next = null;
-    }
-
-    public void deleteAtindex(int index) {
-        if (head == null) {
-            System.out.println("Not pressent ");
-            return;
-        }
+    public int search(int element) {
         Node curr = head;
-        Node prev = null;
-        int count = 0;
-        while (curr != null && count < index) {
-            prev=curr;
-            curr=curr.next;
-            count++;
+        int position = 1;
+        while (curr != null) {
+            if (curr.data == element)
+                return position;
+            curr = curr.next;
+            position++;
         }
-        if(curr==null)
-            System.out.println("Index Bound");
-        prev.next=curr.next;
+        return -1;
     }
+
 }
 
 public class SinglularLinkedList {
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
         linkedList.displaylist();
-        int arr[] = {1, 2, 3, 4, 5,5,5,6,6,7,7,9};
+        int arr[] = {1, 2, 3, 4, 5};
         linkedList.displaylist();
         // Convert array to linked list
         linkedList.convertArraytoLinkedlist(arr);
         // Display the constructed linked list
         linkedList.displaylist();  // Output: 1 2 3 4 5
-        linkedList.deleteStarting();
-        linkedList.displaylist();
-        linkedList.deleteLast();
-        linkedList.displaylist();
-        linkedList.deleteAtindex(1);
-        linkedList.displaylist();
-
+        System.out.println("Index start from you "+linkedList.search(3));
 
     }
 
