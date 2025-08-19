@@ -13,7 +13,6 @@ class Node {
 class LinkedList {
     Node head;
 
-    // adding at Starting
     public void addStarting(int data) {
         if (head == null) {
             head = new Node(data);
@@ -25,18 +24,10 @@ class LinkedList {
         }
     }
 
-    //insertion at end
-    public void addAtEnd(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
+    public void convertArraytoLinkedlist(int arr[]) {
+        for (int i = arr.length - 1; i >= 0; i--) {
+            addStarting(arr[i]);
         }
-
-        Node temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-        temp.next = newNode;
     }
 
     // display or printList
@@ -49,72 +40,65 @@ class LinkedList {
         System.out.println();
     }
 
-    //array to linkedlist
-    public void convertArraytoLinkedlist(int arr[]) {
-        for (int i = arr.length - 1; i >= 0; i--) {
-            addStarting(arr[i]);
+    public void deleteStarting() {
+        if (head != null) {
+            Node temp = head;
+            head = head.next;
         }
     }
 
-    //end
-    Node createLinkedListThroughRecursion(int arr[], int index, int size) {
-        if (index == size)
-            return null;
-        Node temp;
-        temp = new Node(arr[index]);
-        temp.next = createLinkedListThroughRecursion(arr, index + 1, size);
-        return temp;
-    }
-
-    //start
-    Node createLinkedListThroughRecursionStart(int arr[], int index, int size, Node prev) {
-        if (index == size)
-            return prev;
-        Node temp;
-        temp = new Node(arr[index]);
-        temp.next = prev;
-        return createLinkedListThroughRecursionStart(arr, index + 1, size, temp);
-    }
-
-    public void insertAt(int index, int value) {
-        Node newNode = new Node(value);
+    public void deleteLast() {
         if (head == null) {
-            newNode.next = head;
-            head = newNode;
+            System.out.println("List is empty, no nodes to delete.");
+            return;
+        }
+
+        if (head.next == null) {
+            // If only one node exists
+            head = null;
+            return;
+        }
+        Node temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        temp.next = null;
+    }
+
+    public void deleteAtindex(int index) {
+        if (head == null) {
+            System.out.println("Not pressent ");
+            return;
         }
         Node curr = head;
+        Node prev = null;
         int count = 0;
-        while (curr != null && count < index - 1) {
-            curr = curr.next;
+        while (curr != null && count < index) {
+            prev=curr;
+            curr=curr.next;
             count++;
         }
-        if (curr == null)
-            System.out.println("Index Bound nt in range..");
-
-        newNode.next = curr.next;
-        curr.next = newNode;
+        if(curr==null)
+            System.out.println("Index Bound");
+        prev.next=curr.next;
     }
 }
 
 public class SinglularLinkedList {
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
-//        linkedList.addStarting(20);
-//        linkedList.addStarting(21);
         linkedList.displaylist();
-        int arr[] = {1, 2, 3, 4, 5};
+        int arr[] = {1, 2, 3, 4, 5,5,5,6,6,7,7,9};
+        linkedList.displaylist();
+        // Convert array to linked list
         linkedList.convertArraytoLinkedlist(arr);
+        // Display the constructed linked list
+        linkedList.displaylist();  // Output: 1 2 3 4 5
+        linkedList.deleteStarting();
         linkedList.displaylist();
-        linkedList.addStarting(20);
+        linkedList.deleteLast();
         linkedList.displaylist();
-        linkedList.addAtEnd(6);
-        linkedList.displaylist();
-        //head i will get on that
-        linkedList.head = linkedList.createLinkedListThroughRecursion(arr, 0, arr.length);
-        linkedList.displaylist();
-        linkedList.head = linkedList.createLinkedListThroughRecursionStart(arr, 0, arr.length, null);
-        linkedList.displaylist();
-        linkedList.insertAt(3,55);
+        linkedList.deleteAtindex(1);
         linkedList.displaylist();
 
 
