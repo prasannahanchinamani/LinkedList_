@@ -24,14 +24,23 @@ class LinkedList {
             head = current;
         }
     }
-
-    // display
+    //insertion at end
+ public void addAtEnd(int data){
+        Node newNode=new Node(data);
+        Node temp=head;
+        while(temp.next!=null){
+            temp= temp.next;
+        }
+        temp.next=newNode;
+ }
+    // display or printList
     public void displaylist() {
         Node temp = head;
         while (temp != null) {
             System.out.print(temp.data + " ");
             temp = temp.next;
         }
+        System.out.println();
     }
 
     //array to linkedlist
@@ -40,6 +49,7 @@ class LinkedList {
             addStarting(arr[i]);
         }
     }
+
 }
 
 public class SinglularLinkedList {
@@ -51,9 +61,11 @@ public class SinglularLinkedList {
         int arr[] = {1, 2, 3, 4, 5};
         linkedList.convertArraytoLinkedlist(arr);
         linkedList.displaylist();
-        System.out.println();
         linkedList.addStarting(20);
         linkedList.displaylist();
+        linkedList.addAtEnd(6);
+        linkedList.displaylist();
+
     }
 
 }
