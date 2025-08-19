@@ -36,22 +36,23 @@ class LinkedList {
         while (temp != null) {
             System.out.print(temp.data + " ");
             temp = temp.next;
+
         }
         System.out.println();
     }
 
-    public int search(int element) {
-        Node curr = head;
-        int position = 1;
-        while (curr != null) {
-            if (curr.data == element)
-                return position;
-            curr = curr.next;
-            position++;
+    public Node reverse() {
+        Node curr=head;
+        Node prev=null;
+        Node next=null;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
         }
-        return -1;
+        return prev;
     }
-
 }
 
 public class SinglularLinkedList {
@@ -64,7 +65,9 @@ public class SinglularLinkedList {
         linkedList.convertArraytoLinkedlist(arr);
         // Display the constructed linked list
         linkedList.displaylist();  // Output: 1 2 3 4 5
-        System.out.println("Index start from you "+linkedList.search(3));
+        linkedList.head=linkedList.reverse();
+        linkedList.displaylist();
+
 
     }
 
