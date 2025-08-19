@@ -24,15 +24,21 @@ class LinkedList {
             head = current;
         }
     }
+
     //insertion at end
- public void addAtEnd(int data){
-        Node newNode=new Node(data);
-        Node temp=head;
-        while(temp.next!=null){
-            temp= temp.next;
+    public void addAtEnd(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
         }
-        temp.next=newNode;
- }
+
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+    }
+
     // display or printList
     public void displaylist() {
         Node temp = head;
@@ -50,6 +56,25 @@ class LinkedList {
         }
     }
 
+    //end
+    Node createLinkedListThroughRecursion(int arr[], int index, int size) {
+        if (index == size)
+            return null;
+        Node temp;
+        temp = new Node(arr[index]);
+        temp.next = createLinkedListThroughRecursion(arr, index + 1, size);
+        return temp;
+    }
+
+    //start
+    Node createLinkedListThroughRecursionStart(int arr[], int index, int size, Node prev) {
+        if (index == size)
+            return prev;
+        Node temp;
+        temp = new Node(arr[index]);
+        temp.next = prev;
+        return createLinkedListThroughRecursionStart(arr, index + 1, size, temp);
+    }
 }
 
 public class SinglularLinkedList {
@@ -65,6 +90,12 @@ public class SinglularLinkedList {
         linkedList.displaylist();
         linkedList.addAtEnd(6);
         linkedList.displaylist();
+        //head i will get on that
+        linkedList.head = linkedList.createLinkedListThroughRecursion(arr, 0, arr.length);
+        linkedList.displaylist();
+        linkedList.head=linkedList.createLinkedListThroughRecursionStart(arr,0,arr.length,null);
+        linkedList.displaylist();
+
 
     }
 
