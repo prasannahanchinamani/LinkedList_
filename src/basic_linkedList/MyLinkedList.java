@@ -14,14 +14,14 @@ public class MyLinkedList<T extends Comparable<T>> {
         Node<T> leftsort = sort(list);
         Node<T> rightsort = sort(right);
 
-        return mergeSort(leftsort, rightsort);
+        return mergeSort( rightsort,leftsort);
     }
 
     public Node<T> mergeSort(Node<T> list1, Node<T> list2) {
         Node<T> dummy = new Node<>(null);
         Node<T> temp = dummy;
         while (list1 != null && list2 != null) {
-            if (list1.data.compareTo(list2.data) <= 0) {
+            if (list1.data.compareTo(list2.data) >=0) {
                 temp.next = list1;
                 list1 = list1.next;
             } else {

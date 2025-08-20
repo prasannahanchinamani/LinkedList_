@@ -2,21 +2,30 @@ package basic_linkedList;
 
 public class Main {
     public static void main(String[] args) {
-        MyLinkedList<Integer> list1 = new MyLinkedList<>();
-        list1.insertAtend(1);
-        list1.insertAtend(3);
-        list1.insertAtend(1);
-        list1.insertAtend(3);
-        list1.insertAtend(8);
-        list1.insertAtend(4);
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.insertAtend(5);
+        list.insertAtend(2);
+        list.insertAtend(8);
+        list.insertAtend(1);
 
+        System.out.println("Original List:");
+        list.printlist();
 
-        MyLinkedList<Integer> sortList = new MyLinkedList<>();
-        sortList.head = sortList.sort(list1.head);
-        sortList.printlist();
+        // Sort the list first
+        list.head = list.sort(list.head);
+        System.out.println("Sorted List:");
+        list.printlist();
 
-//        miidleList.head=miidleList.midValue(list1.head);
-//        miidleList.printlist();
+        // Search for target
+        int target = 5;
+        Node<Integer> result = BinarySearchLinkedList.binarySearch(list.head, target);
 
+        if (result != null) {
+            System.out.println("Found: " + result.data);
+        } else {
+            System.out.println("Not Found");
+        }
     }
+
+
 }
