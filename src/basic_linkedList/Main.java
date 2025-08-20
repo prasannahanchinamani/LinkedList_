@@ -5,17 +5,18 @@ public class Main {
         MyLinkedList<Integer> list1 = new MyLinkedList<>();
         list1.insertAtend(1);
         list1.insertAtend(3);
-        list1.insertAtend(5);
+        list1.insertAtend(1);
+        list1.insertAtend(3);
+        list1.insertAtend(8);
+        list1.insertAtend(4);
 
-        MyLinkedList<Integer> list2 = new MyLinkedList<>();
-        list2.insertAtend(2);
-        list2.insertAtend(4);
-        list2.insertAtend(6);
 
-        MyLinkedList<Integer> mergedList = new MyLinkedList<>();
-        mergedList.head = mergedList.mergetwoSortedArray(list1.head, list2.head);
+        MyLinkedList<Integer> sortList = new MyLinkedList<>();
+        sortList.head = sortList.sort(list1.head);
+        sortList.printlist();
 
-        System.out.print("Merged List: ");
-        mergedList.printlist();
+//        miidleList.head=miidleList.midValue(list1.head);
+//        miidleList.printlist();
+
     }
 }

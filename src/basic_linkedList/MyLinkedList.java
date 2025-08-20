@@ -3,11 +3,24 @@ package basic_linkedList;
 public class MyLinkedList<T extends Comparable<T>> {
     Node<T> head;
 
-    public Node<T> mergetwoSortedArray(Node<T> list1, Node<T> list2) {
+    public Node<T> sort(Node<T> list) {
+        if (list == null||list.next==null)
+            return list;
+//        if (head == null || head.next == null)
+//            return head;
+        Node<T> mid = getMiddle(list);
+        Node<T> right = mid.next;
+        mid.next = null;
+        Node<T> leftsort = sort(list);
+        Node<T> rightsort = sort(right);
+
+        return mergeSort(leftsort, rightsort);
+    }
+
+    public Node<T> mergeSort(Node<T> list1, Node<T> list2) {
         Node<T> dummy = new Node<>(null);
         Node<T> temp = dummy;
         while (list1 != null && list2 != null) {
-//            if (list1.data.comapreTo(list2.data)<=0) {
             if (list1.data.compareTo(list2.data) <= 0) {
                 temp.next = list1;
                 list1 = list1.next;
@@ -17,12 +30,19 @@ public class MyLinkedList<T extends Comparable<T>> {
             }
             temp = temp.next;
         }
-        if (list1 != null) {
-            temp.next = list1;
-        } else {
-            temp.next = list2;
-        }
+        temp.next = (list1 != null) ? list1 : list2;
         return dummy.next;
+    }
+
+    public Node<T> getMiddle(Node<T> list) {
+        if (list == null) return null;
+        Node<T> slow = list;
+        Node<T> fast = list;
+        while (fast.next!= null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
     }
 
     public void insertAtend(T data) {
